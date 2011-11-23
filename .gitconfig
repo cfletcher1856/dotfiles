@@ -1,0 +1,14 @@
+[user]
+    name = Colin Fletcher
+    email = cfletcher1856@gmail.com
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+
+[push]
+    default = matching
+
+[core]
+    editor = vim
