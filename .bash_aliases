@@ -25,16 +25,18 @@ alias lt='ls -ltr'              # sort by date
 alias lm='ls -al |more'         # pipe through 'more'
 alias tree='tree -Cs'           # nice alternative to 'ls'
 
-alias cls='clear'
-alias cla='clear'
+alias cls='clear;figlet "fletch"'
+alias cla='clear;figlet "fletch"'
+alias ifconfig='sudo ifconfig'
 alias apt='sudo apt-get install'
 alias remove='sudo apt-get remove'
 alias search='apt-cache search'
-alias dashboardenv='workon dashboard'
-alias intranetenv='workon intranet'
 alias startdashboard='~/Projects/dashboard/dashboard/manage.py runserver 0:8000'
 alias startcelery='supervisord -c ~/Projects/dashboard/etc/supervisord.conf'
-alias startintranet='~/Projects/intranet/intranet/manage.py runserver 0:5000'
+alias startintranet=' foreman start -f ~/Projects/intranet/Procfile.dev'
+
+alias svi='sudo vim'
+alias ports='netstat -a | egrep "Proto|LISTEN"'
 
 # tailoring 'less'
 alias more='less'
@@ -88,6 +90,12 @@ complete -f -o default -X '!*.+(jpg|gif|xpm|png|bmp)' xv gimp
 complete -f -o default -X '!*.mp3' mpg123
 complete -f -o default -X '!*.ogg' ogg123
 
+
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+
+ # Load RVM into a shell session *as a function*
+ [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
 upinfo()
 {
 echo -ne "\t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
@@ -98,6 +106,24 @@ export PS1="${PS1%\\\$*}"' \t \$ '
 
 export WORKON_HOME="~/.virtualenv"
 source /usr/local/bin/virtualenvwrapper.sh
+
+
+test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}' | xargs`
+
+if [ "$test" = "" ]; then
+       # there is no agent running
+       if [ -e "$HOME/agent.sh" ]; then
+          # remove the old file
+          /bin/rm -f $HOME/agent.sh
+       fi;
+       # start a new agent
+       /usr/bin/ssh-agent | /usr/bin/grep -v echo >&$HOME/agent.sh 
+fi;
+
+test -e $HOME/agent.sh && source $HOME/agent.sh
+
+alias kagent="kill -9 $SSH_AGENT_PID"
+
 
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
@@ -111,4 +137,3 @@ echo -ne "${Red}Today is:\t\t${Cyan}" `date`; echo ""
 echo -e "${Red}Kernel Information: \t${Cyan}" `uname -smr`
 echo -ne "${Red}Uptime is: \t${Cyan}";upinfo;echo ""
 echo -e "${Cyan}"; cal -3
-

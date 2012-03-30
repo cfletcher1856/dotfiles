@@ -2,13 +2,30 @@
     name = Colin Fletcher
     email = cfletcher1856@gmail.com
 
+[push]
+    default = tracking
+
+[alias]
+#    br = branch -a
+#    ci = commit
+#    st = status -s --ignore-submodules
+#    co = checkout
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
 [color]
+    branch = auto
     diff = auto
     status = auto
-    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
 
-[push]
-    default = matching
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
 
-[core]
-    editor = vim
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan

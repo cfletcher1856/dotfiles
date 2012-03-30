@@ -1,55 +1,3 @@
-" https://github.com/sontek/dotfiles/
-" ==========================================================
-" Dependencies - Libraries/Applications outside of vim
-" ==========================================================
-" Pep8 - http://pypi.python.org/pypi/pep8
-" Pyflakes
-" Ack
-" Rake & Ruby for command-t
-" nose, django-nose
-
-" ==========================================================
-" Plugins included
-" ==========================================================
-" Pathogen
-"     Better Management of VIM plugins
-"
-" GunDo
-"     Visual Undo in vim with diff's to check the differences
-"
-" Pytest
-"     Runs your Python tests in Vim.
-"
-" Commant-T
-"     Allows easy search and opening of files within a given path
-"
-" Snipmate
-"     Configurable snippets to avoid re-typing common comands
-"
-" PyFlakes
-"     Underlines and displays errors with Python on-the-fly
-"
-" Fugitive
-"    Interface with git from vim
-"
-" Git
-"    Syntax highlighting for git config files
-"
-" Minibufexpl
-"    Visually display what buffers are currently opened
-"
-" Pydoc
-"    Opens up pydoc within vim
-"
-" Surround
-"    Allows you to surround text with open/close tags
-"
-" Py.test
-"    Run py.test test's from within vim
-"
-" MakeGreen
-"    Generic test runner that works with nose
-"
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -248,7 +196,7 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 " ==========================================================
 " Javascript
 " ==========================================================
-au BufRead *.js set makeprg=jslint\ %
+" au BufRead *.js set makeprg=jslint\ %
 
 " Don't allow snipmate to take over tab
 autocmd VimEnter * ino <c-j> <c-r>=TriggerSnippet()<cr>
@@ -262,14 +210,14 @@ let g:acp_completeoptPreview=1
 " FileType specific changes
 " ============================================================
 " Mako/HTML
-autocmd BufNewFile,BufRead *.mako,*.mak setlocal ft=html
-autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+" autocmd BufNewFile,BufRead *.mako,*.mak setlocal ft=html
+" autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 " Python
 "au BufRead *.py compiler nose
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+" au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " Don't let pyflakes use the quickfix window
 let g:pyflakes_use_quickfix = 0
 
