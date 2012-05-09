@@ -1,3 +1,5 @@
+export TDSDUMP=/tmp/freetds.log
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -16,10 +18,10 @@ alias du='du -h'
 alias df='df -kh'
 
 # The 'ls' family (this assumes you use the GNU ls)
-alias ls='ls -al --color'       # add colors for filetype recognition
+alias la='ls -al --color'       # add colors for filetype recognition
 alias lx='ls -lXB'              # sort by extension
 alias lk='ls -lSr'              # sort by size
-alias la='ls -Al'               # show hidden files
+#alias la='ls -Al'               # show hidden files
 alias lr='ls -lR'               # recursice ls
 alias lt='ls -ltr'              # sort by date
 alias lm='ls -al |more'         # pipe through 'more'
@@ -27,6 +29,7 @@ alias tree='tree -Cs'           # nice alternative to 'ls'
 
 alias cls='clear;figlet "fletch"'
 alias cla='clear;figlet "fletch"'
+alias csl='clear;figlet "fletch"'
 alias ifconfig='sudo ifconfig'
 alias apt='sudo apt-get install'
 alias remove='sudo apt-get remove'
@@ -35,7 +38,7 @@ alias startdashboard='~/Projects/dashboard/dashboard/manage.py runserver 0:8000'
 alias startcelery='supervisord -c ~/Projects/dashboard/etc/supervisord.conf'
 alias startintranet=' foreman start -f ~/Projects/intranet/Procfile.dev'
 
-alias svi='sudo vim'
+alias svi='sudo vi'
 alias ports='netstat -a | egrep "Proto|LISTEN"'
 
 # tailoring 'less'
@@ -104,7 +107,7 @@ echo -ne "\t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
 PS1='\[\033[01;32m\]\u\[\033[01;34m\]@\[\033[01;31m\]\h\[\033[00;34m\](\[\033[01;34m\]\w\[\033[00;34m\])\[\033[01;32m\]:\[\033[00m\]'
 export PS1="${PS1%\\\$*}"' \t \$ '
 
-export WORKON_HOME="~/.virtualenv"
+export WORKON_HOME=$HOME/.virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 
 
@@ -114,10 +117,10 @@ if [ "$test" = "" ]; then
        # there is no agent running
        if [ -e "$HOME/agent.sh" ]; then
           # remove the old file
-          /bin/rm -f $HOME/agent.sh
+          rm -f $HOME/agent.sh
        fi;
        # start a new agent
-       /usr/bin/ssh-agent | /usr/bin/grep -v echo >&$HOME/agent.sh 
+       ssh-agent | grep -v echo >&$HOME/agent.sh 
 fi;
 
 test -e $HOME/agent.sh && source $HOME/agent.sh
@@ -132,8 +135,10 @@ else
 fi
 
 clear
-echo -e "${LIGHTGRAY}";figlet "fletch";
+#echo -e "${LIGHTGRAY}";figlet "fletch";
+echo -e $(fortune) | cowsay -f $(ls /usr/share/cowsay/cows/ | shuf -n1); echo ""
 echo -ne "${Red}Today is:\t\t${Cyan}" `date`; echo ""
 echo -e "${Red}Kernel Information: \t${Cyan}" `uname -smr`
 echo -ne "${Red}Uptime is: \t${Cyan}";upinfo;echo ""
 echo -e "${Cyan}"; cal -3
+

@@ -223,12 +223,12 @@ if [ -x "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
     PATH=/Applications/MacVim.app/Contents/MacOS/:$PATH
 fi
 
-#PYTHONSTARTUP=~/.pythonrc.py
-#export PYTHONSTARTUP
+PYTHONSTARTUP=~/.pythonrc.py
+export PYTHONSTARTUP
 
 parse_git_branch ()
 {
-    git symbolic-ref HEAD 2> /dev/null | sed -e 's#refs\/heads\/\(.*\)#(git::\1)#'
+  git symbolic-ref HEAD 2> /dev/null | sed -e 's#refs\/heads\/\(.*\)#(git::\1)#'
 }
 parse_svn_branch() {
   parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print "(svn::"$1 "/" $2 ")"}'
@@ -239,7 +239,7 @@ parse_svn_url() {
 parse_svn_repository_root() {
   svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
 }
-
+set -o emacs
 export EDITOR="$vim"
 export GIT_EDITOR="$vim"
 
