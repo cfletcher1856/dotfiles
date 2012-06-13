@@ -244,13 +244,13 @@ parse_git_status(){
   # add an else if or two here if you want to get more specific
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote=" ${Yellow}↑"
+      remote=" ${Yellow}↑${White}"
     else
-      remote=" ${Yellow}↓"
+      remote=" ${Yellow}↓${White}"
     fi
   fi
   if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="${Yellow}↕"
+    remote="${Yellow}↕${White}"
   fi
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     echo -e "${remote}${state}"
