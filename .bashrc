@@ -226,10 +226,42 @@ fi
 PYTHONSTARTUP=~/.pythonrc.py
 export PYTHONSTARTUP
 
+#parse_git_status() {
+#  if [ $(git rev-parse --is-inside-work-tree 2> /dev/null) ]; then
+#    git diff --quiet || echo -e " ${Red}*${White}"
+#  fi
+#}
+
+parse_git_status(){
+  git rev-parse --git-dir &> /dev/null
+  git_status="$(git status 2> /dev/null)"
+  branch_pattern="^# On branch ([^${IFS}]*)"
+  remote_pattern="# Your branch is (.*) of"
+  diverge_pattern="# Your branch and (.*) have diverged"
+  if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+    state=" ${Red}*${White}"
+  fi
+  # add an else if or two here if you want to get more specific
+  if [[ ${git_status} =~ ${remote_pattern} ]]; then
+    if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+      remote=" ${Yellow}↑"
+    else
+      remote=" ${Yellow}↓"
+    fi
+  fi
+  if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+    remote="${Yellow}↕"
+  fi
+  if [[ ${git_status} =~ ${branch_pattern} ]]; then
+    echo -e "${remote}${state}"
+  fi
+}
+
 parse_git_branch ()
 {
-  git symbolic-ref HEAD 2> /dev/null | sed -e 's#refs\/heads\/\(.*\)#(git::\1)#'
+  git symbolic-ref HEAD 2> /dev/null | sed -e "s#refs\/heads\/\(.*\)#(git::\1$(parse_git_status))#"
 }
+
 parse_svn_branch() {
   parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print "(svn::"$1 "/" $2 ")"}'
 }

@@ -16,7 +16,7 @@
  filetype plugin indent on     " enable loading indent file for filetype
  set number                    " Display line numbers
  set numberwidth=1             " using only 1 column (and 1 space) while possible
- set background=dark           " We are using dark background in vim
+ " set background=dark           " We are using dark background in vim
  set title                     " show title in console title bar
  set wildmenu                  " Menu completion in command mode on <Tab>
  set wildmode=full             " <Tab> cycles between all matching choices.
@@ -35,7 +35,7 @@ if exists("&colorcolumn")
 endif
 
  """ Moving Around/Editing
- set cursorline              " have a line indicate the cursor location
+ "set cursorline              " have a line indicate the cursor location
  set ruler                   " show the cursor position all the time
  set nostartofline           " Avoid moving cursor to BOL when jumping around
  set virtualedit=block       " Let cursor move past the last char in <C-v> mode
@@ -115,3 +115,6 @@ endif
 
  " This beauty remembers where you were the last time you edited the file, and returns to the same position.
  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+ set t_Co=256
+ colorscheme blackboard 
