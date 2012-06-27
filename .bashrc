@@ -239,18 +239,18 @@ parse_git_status(){
   remote_pattern="# Your branch is (.*) of"
   diverge_pattern="# Your branch and (.*) have diverged"
   if [[ ! ${git_status}} =~ "working directory clean" ]]; then
-    state=" ${Red}*${White}"
+    state=" \001${Red}\002*\001${White}\002"
   fi
   # add an else if or two here if you want to get more specific
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote=" ${Yellow}↑${White}"
+      remote=" \001${Yellow}\002↑\001${White}\002"
     else
-      remote=" ${Yellow}↓${White}"
+      remote=" \001${Yellow}\002↓\001${White}\002"
     fi
   fi
   if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="${Yellow}↕${White}"
+    remote=" \001${Yellow}\002↕\001${White}\002"
   fi
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     echo -e "${remote}${state}"
@@ -262,18 +262,9 @@ parse_git_branch ()
   git symbolic-ref HEAD 2> /dev/null | sed -e "s#refs\/heads\/\(.*\)#(git::\1$(parse_git_status))#"
 }
 
-parse_svn_branch() {
-  parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print "(svn::"$1 "/" $2 ")"}'
-}
-parse_svn_url() {
-  svn info 2>/dev/null | sed -ne 's#^URL: ##p'
-}
-parse_svn_repository_root() {
-  svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
-}
 set -o emacs
 export EDITOR="$vim"
 export GIT_EDITOR="$vim"
 
-# Add git and svn branch names
-export PS1="$PS1\$(parse_git_branch)\$(parse_svn_branch) "
+# Add git branch names
+export PS1="$PS1\$(parse_git_branch) "
