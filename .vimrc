@@ -105,6 +105,8 @@ endif
  " Don't let pyflakes use the quickfix window
  let g:pyflakes_use_quickfix = 0
 
+ let g:Powerline_symbols='fancy'
+
  autocmd VimEnter * NERDTree
  autocmd VimEnter * wincmd p
 
@@ -117,4 +119,6 @@ endif
  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
  set t_Co=256
- colorscheme blackboard 
+ colorscheme blackboard
+
+ nnoremap <F3> :NumbersToggle<CR>

@@ -41,6 +41,9 @@ alias startintranet=' foreman start -f ~/Projects/intranet/Procfile.dev'
 alias svi='sudo vi'
 alias ports='netstat -a | egrep "Proto|LISTEN"'
 
+alias gaa='git add -A .'
+alias gs='git status'
+
 # tailoring 'less'
 alias more='less'
 export PAGER=less
@@ -93,7 +96,7 @@ complete -f -o default -X '!*.+(jpg|gif|xpm|png|bmp)' xv gimp
 complete -f -o default -X '!*.mp3' mpg123
 complete -f -o default -X '!*.ogg' ogg123
 
-
+shopt -s globstar
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
  # Load RVM into a shell session *as a function*
@@ -109,7 +112,7 @@ export PS1="${PS1%\\\$*}"' \t \$ '
 
 export WORKON_HOME=$HOME/.virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
-
+export VIRTUALENV_DISTRIBUTE=true
 
 test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}' | xargs`
 
