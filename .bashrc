@@ -267,4 +267,11 @@ export EDITOR="$vim"
 export GIT_EDITOR="$vim"
 
 # Add git branch names
-export PS1="$PS1\$(parse_git_branch) "
+ #export PS1="$PS1\$(parse_git_branch) "
+
+function _update_ps1()
+{
+  export PS1="$(~/powerline-bash.py $?)"
+}
+
+export PROMPT_COMMAND="_update_ps1"
