@@ -130,6 +130,8 @@ test -e $HOME/agent.sh && source $HOME/agent.sh
 
 alias kagent="kill -9 $SSH_AGENT_PID"
 
+$(ssh-add)
+
 
 if [ -e /lib/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
