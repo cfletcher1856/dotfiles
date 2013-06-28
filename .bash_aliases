@@ -27,9 +27,9 @@ alias lt='ls -ltr'              # sort by date
 alias lm='ls -al |more'         # pipe through 'more'
 alias tree='tree -Cs'           # nice alternative to 'ls'
 
-alias cls='clear;figlet "fletch"'
-alias cla='clear;figlet "fletch"'
-alias csl='clear;figlet "fletch"'
+alias cls='clear;figlet "shameballers"'
+alias cla='clear;figlet "shameballers"'
+alias csl='clear;figlet "shameballers"'
 alias ifconfig='sudo ifconfig'
 alias apt='sudo apt-get install'
 alias remove='sudo apt-get remove'
@@ -43,6 +43,9 @@ alias ports='netstat -a | egrep "Proto|LISTEN"'
 
 alias gaa='git add -A .'
 alias gs='git status'
+alias gas='git commit -am'
+alias gc='git checkout'
+alias gitsome='git submodule init && git submodule update'
 
 # tailoring 'less'
 alias more='less'
@@ -114,24 +117,22 @@ export WORKON_HOME=$HOME/.virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 export VIRTUALENV_DISTRIBUTE=true
 
-test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}' | xargs`
 
-if [ "$test" = "" ]; then
-       # there is no agent running
-       if [ -e "$HOME/agent.sh" ]; then
-          # remove the old file
-          rm -f $HOME/agent.sh
-       fi;
-       # start a new agent
-       ssh-agent | grep -v echo >&$HOME/agent.sh 
-fi;
+# test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}' | xargs`
+#
+#if [ "$test" = "" ]; then
+#       # there is no agent running
+#       if [ -e "$HOME/agent.sh" ]; then
+#          # remove the old file
+#          rm -f $HOME/agent.sh
+#       fi;
+#       # start a new agent
+#       ssh-agent | grep -v echo >&$HOME/agent.sh 
+#fi;
 
-test -e $HOME/agent.sh && source $HOME/agent.sh
+#test -e $HOME/agent.sh && source $HOME/agent.sh
 
-alias kagent="kill -9 $SSH_AGENT_PID"
-
-$(ssh-add)
-
+#alias kagent="kill -9 $SSH_AGENT_PID"
 
 if [ -e /lib/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
@@ -147,3 +148,5 @@ echo -e "${Red}Kernel Information: \t${Cyan}" `uname -smr`
 echo -ne "${Red}Uptime is: \t${Cyan}";upinfo;echo ""
 echo -e "${Cyan}"; cal -3
 
+/usr/bin/keychain $HOME/.ssh/id_rsa
+source $HOME/.keychain/$HOSTNAME-sh

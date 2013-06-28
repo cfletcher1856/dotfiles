@@ -223,8 +223,13 @@ if [ -x "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
     PATH=/Applications/MacVim.app/Contents/MacOS/:$PATH
 fi
 
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+
 PYTHONSTARTUP=~/.pythonrc.py
 export PYTHONSTARTUP
+
+export PYTHONDONTWRITEBYTECODE=1
 
 #parse_git_status() {
 #  if [ $(git rev-parse --is-inside-work-tree 2> /dev/null) ]; then
@@ -275,3 +280,11 @@ function _update_ps1()
 }
 
 export PROMPT_COMMAND="_update_ps1"
+
+function cl () {
+    if [ $# = 0 ]; then
+        cd && ls -la
+    else
+        cd "$*" && ls -la
+    fi
+}
