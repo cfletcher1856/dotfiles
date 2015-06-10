@@ -18,7 +18,7 @@ alias du='du -h'
 alias df='df -kh'
 
 # The 'ls' family (this assumes you use the GNU ls)
-alias la='ls -al --color'       # add colors for filetype recognition
+alias la='ls -alh --color'       # add colors for filetype recognition
 alias lx='ls -lXB'              # sort by extension
 alias lk='ls -lSr'              # sort by size
 #alias la='ls -Al'               # show hidden files
@@ -27,9 +27,9 @@ alias lt='ls -ltr'              # sort by date
 alias lm='ls -al |more'         # pipe through 'more'
 alias tree='tree -Cs'           # nice alternative to 'ls'
 
-alias cls='clear;figlet "shameballers"'
-alias cla='clear;figlet "shameballers"'
-alias csl='clear;figlet "shameballers"'
+alias cls='clear;figlet "cheesy"'
+alias cla='clear;figlet "cheesy"'
+alias csl='clear;figlet "cheesy"'
 alias ifconfig='sudo ifconfig'
 alias apt='sudo apt-get install'
 alias remove='sudo apt-get remove'
@@ -40,6 +40,9 @@ alias startintranet=' foreman start -f ~/Projects/intranet/Procfile.dev'
 
 alias svi='sudo vi'
 alias ports='netstat -a | egrep "Proto|LISTEN"'
+
+alias cat="pygmentize -g"
+alias foreman="honcho"
 
 alias gaa='git add -A .'
 alias gs='git status'
@@ -148,5 +151,5 @@ echo -e "${Red}Kernel Information: \t${Cyan}" `uname -smr`
 echo -ne "${Red}Uptime is: \t${Cyan}";upinfo;echo ""
 echo -e "${Cyan}"; cal -3
 
-/usr/bin/keychain $HOME/.ssh/id_rsa
+/usr/bin/keychain -q $HOME/.ssh/id_rsa
 source $HOME/.keychain/$HOSTNAME-sh

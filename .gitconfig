@@ -11,6 +11,8 @@
 #    st = status -s --ignore-submodules
 #    co = checkout
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    undo-commit = reset --soft HEAD^
+    pullall = !git pull && git submodule update --init --recursive
 
 [color]
     branch = auto
@@ -32,3 +34,6 @@
 
 [core]
     filemode = false
+	trustctime = false
+[help]
+	autocorrect = 1

@@ -288,3 +288,8 @@ function cl () {
         cd "$*" && ls -la
     fi
 }
+
+export PATH="~/node/lib/node_modules/:$PATH"
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

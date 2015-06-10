@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/etc/apt/sources.list.d'
 let g:netrw_dirhist_2='/home/cfletcher/Projects/intranet/tmp'
 let g:netrw_dirhist_3='/home/cfletcher/.virtualenv'
+let g:netrw_dirhist_4='/home/cfletcher/.virtualenv/intranet/src/fedex/.git'
+let g:netrw_dirhist_5='/home/cfletcher/Projects/intranet/.git'
+let g:netrw_dirhist_6='/etc/network'
