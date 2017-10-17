@@ -289,7 +289,15 @@ function cl () {
     fi
 }
 
-export PATH="~/node/lib/node_modules/:$PATH"
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+scanFunction(){
+    scanimage --source=Flatbed > ~/Documents/$1.pnm
+    gm convert ~/Documents/$1.pnm ~/Documents/$1.pdf
+}
+
+alias scan=scanFunction
+alias upgrade="~/apt-upgrade.sh"
+export DEV=1
+unset GREP_OPTIONS

@@ -15,7 +15,7 @@ except ImportError:
     print("You need readline, rlcompleter, and atexit")
 
 readline.parse_and_bind("tab: complete")
-#readline.parse_and_bind ("bind ^I rl_complete")
+#readline.parse_and_bind("bind ^I rl_complete")
 
 class Completer(object):
     def __init__(self):
